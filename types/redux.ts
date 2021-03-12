@@ -2,6 +2,15 @@ import { User } from ".";
 
 interface State {}
 
+interface BaseState {
+  err: any;
+  isLoading: boolean;
+}
+
+interface UserState extends BaseState {
+  user: User;
+}
+
 interface UserActionTypes {
   // Login
   LOGIN_REQUESTED: string;
@@ -17,11 +26,6 @@ interface UserActionTypes {
   UPDATE_REQUESTED: string;
   UPDATE_SUCCEED: string;
   UPDATE_FAILED: string;
-}
-
-interface UserState {
-  user: User;
-  err: any;
 }
 
 interface Action {
