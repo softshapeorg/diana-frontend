@@ -1,6 +1,8 @@
 import { User } from ".";
 
-interface State {}
+interface State {
+  user: UserState;
+}
 
 interface BaseState {
   err: any;
