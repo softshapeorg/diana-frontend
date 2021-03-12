@@ -1,3 +1,5 @@
+import { User } from ".";
+
 interface State {}
 
 interface UserActionTypes {
@@ -17,4 +19,14 @@ interface UserActionTypes {
   UPDATE_FAILED: string;
 }
 
-export type { State, UserActionTypes };
+interface UserState {
+  user: User;
+  err: any;
+}
+
+interface Action {
+  type: string;
+  payload?: any;
+}
+
+export type { State, UserActionTypes, UserState, Action };
