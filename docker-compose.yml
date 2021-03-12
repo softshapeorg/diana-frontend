@@ -1,0 +1,9 @@
+version: "3"
+
+services:
+  web:
+    build: .
+    command: npm run start
+    container_name: diana_frontend
+    ports:
+      - 3000:3000
