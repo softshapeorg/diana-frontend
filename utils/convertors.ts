@@ -1,5 +1,7 @@
 import * as _ from "lodash";
 
+import { UserTokens } from "../types";
+
 const convertObjectKeysToCamelCase = (data: any) => {
   const res = {};
 
