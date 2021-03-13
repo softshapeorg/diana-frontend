@@ -1,0 +1,29 @@
+.container {
+  height: 100vh;
+  .content {
+    height: 100%;
+    .left {
+      color: white;
+      height: 100%;
+      display: grid;
+      place-content: center;
+      background-image: linear-gradient(
+        to bottom right,
+        #fdf497,
+        #fd5949,
+        #d6249f
+      );
+    }
+    .right {
+      height: 100%;
+      .links {
+        text-align: center;
+        display: block;
+        padding: 1rem 0;
+      }
+      .form {
+        padding: 3rem;
+      }
+    }
+  }
+}
