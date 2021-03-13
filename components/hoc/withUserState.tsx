@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { User } from "../../types";
 import { setUser } from "../../redux/actions";
 
-const withUser = (Component: any) => {
+const withUserState = (Component: any) => {
   interface WrapperProps {
     user: User;
     setUser: Function;
@@ -21,4 +21,4 @@ const withUser = (Component: any) => {
   return connect(null, mapDispatchToProps)(Wrapper);
 };
 
-export default withUser;
+export default withUserState;
