@@ -12,6 +12,7 @@ interface UserTokens {
 }
 
 interface UserData {
+  pk?: string;
   firstName: string;
   lastName: string;
   username: string;
