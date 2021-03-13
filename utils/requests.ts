@@ -1,9 +1,6 @@
 import axios from "../axios";
 import { UserTokens, UserData } from "../types";
-import {
-  convertObjectKeysToCamelCase,
-  convertObjectKeysToSnakeCase,
-} from "../utils";
+import { mapObjectKeysToCamelCase, mapObjectKeysToSnakeCase } from "../utils";
 
 // =============== User ===============
 const userTokens = async (
@@ -24,16 +21,16 @@ const userData = async (tokens: UserTokens): Promise<UserData> => {
     },
   });
 
-  return <UserData>convertObjectKeysToCamelCase(res.data);
+  return <UserData>mapObjectKeysToCamelCase(res.data);
 };
 
 const registration = async (data: any): Promise<UserData> => {
   const res = await axios.post(
     "/accounts/registration/",
-    convertObjectKeysToSnakeCase(data)
+    mapObjectKeysToSnakeCase(data)
   );
 
-  return <UserData>convertObjectKeysToCamelCase(res.data);
+  return <UserData>mapObjectKeysToCamelCase(res.data);
 };
 
 const requests = {

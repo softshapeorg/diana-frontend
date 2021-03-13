@@ -1,5 +1,5 @@
 import requests from "./requests";
 import cookies from "./cookies";
-export * from "./convertors";
+export * from "./mappers";
 
 export { requests, cookies };

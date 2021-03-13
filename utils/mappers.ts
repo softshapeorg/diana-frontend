@@ -1,8 +1,6 @@
 import * as _ from "lodash";
 
-import { UserTokens } from "../types";
-
-const convertObjectKeysToCamelCase = (data: any) => {
+const mapObjectKeysToCamelCase = (data: any) => {
   const res = {};
 
   for (let key in data) {
@@ -12,7 +10,7 @@ const convertObjectKeysToCamelCase = (data: any) => {
   return res;
 };
 
-const convertObjectKeysToSnakeCase = (data: any) => {
+const mapObjectKeysToSnakeCase = (data: any) => {
   const res = {};
 
   for (let key in data) {
@@ -22,4 +20,4 @@ const convertObjectKeysToSnakeCase = (data: any) => {
   return res;
 };
 
-export { convertObjectKeysToCamelCase, convertObjectKeysToSnakeCase };
+export { mapObjectKeysToCamelCase, mapObjectKeysToSnakeCase };
