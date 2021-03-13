@@ -1,6 +1,9 @@
 import { UserActionTypes as UserActionTypesType } from "../types";
 
 const UserActionTypes: UserActionTypesType = {
+  // Set user
+  SET_USER: "Set user.",
+
   // Login
   LOGIN_REQUESTED: "Login request has been requested.",
   LOGIN_SUCCEED: "Login request has been succeed.",

@@ -14,6 +14,9 @@ interface UserState extends BaseState {
 }
 
 interface UserActionTypes {
+  // Set User
+  SET_USER: string;
+
   // Login
   LOGIN_REQUESTED: string;
   LOGIN_SUCCEED: string;

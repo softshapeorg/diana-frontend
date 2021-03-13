@@ -10,10 +10,18 @@ const init: UserState = {
   isLoading: false,
 };
 
-const reducer = (state = init, action: Action) => {
+const reducer = (state = init, action: Action): UserState => {
   switch (action.type) {
     default: {
       return state;
+    }
+
+    case types.SET_USER: {
+      return {
+        user: action.payload.user,
+        err: null,
+        isLoading: false,
+      };
     }
 
     case types.LOGIN_REQUESTED: {
@@ -26,15 +34,15 @@ const reducer = (state = init, action: Action) => {
       // Set cookies
       cookies.setAuthCookies(action.payload.tokens);
 
-      return produce(state, (state) => {
-        state.isLoading = false;
-        state.err = null;
-        state.user = {
+      return {
+        isLoading: false,
+        err: null,
+        user: {
           authed: true,
           tokens: action.payload.tokens,
           data: action.payload.data,
-        };
-      });
+        },
+      };
     }
 
     case types.LOGIN_FAILED: {

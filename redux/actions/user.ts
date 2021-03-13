@@ -1,5 +1,6 @@
 import { UserActionTypes as types } from "../types";
 import { requests } from "../../utils";
+import { User } from "../../types";
 
 const login = (username: string, password: string) => async (
   dispatch: Function
@@ -29,4 +30,11 @@ const login = (username: string, password: string) => async (
   }
 };
 
-export { login };
+const setUser = (user: User) => ({
+  type: types.SET_USER,
+  payload: {
+    user,
+  },
+});
+
+export { login, setUser };
