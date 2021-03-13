@@ -6,7 +6,7 @@ import requests from "./requests";
 
 const serverSideAuthenticate = async (
   context: GetServerSidePropsContext
-): Promise<User> => {
+): Promise<[user: User, shouldSetCookies: boolean]> => {
   const tokens = mapCookiesToTokens(context.req.cookies);
 
   try {
@@ -16,11 +16,7 @@ const serverSideAuthenticate = async (
     const data = await requests.user.data(tokens);
 
     console.log("=============== Login with ACCESS token ===============");
-    return {
-      authed: true,
-      tokens,
-      data,
-    };
+    return [{ authed: true, tokens, data }, false];
   } catch (err) {
     // Authenticate user based on REFRESH token
 
@@ -31,11 +27,7 @@ const serverSideAuthenticate = async (
     const data = await requests.user.data(refreshedTokens);
 
     console.log("=============== Login with REFRESH token ===============");
-    return {
-      authed: false,
-      tokens: refreshedTokens,
-      data,
-    };
+    return [{ authed: false, tokens: refreshedTokens, data }, true];
   }
 };
 

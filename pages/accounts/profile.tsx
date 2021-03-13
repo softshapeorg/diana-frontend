@@ -14,10 +14,11 @@ const Profile: React.FC<ProfileProps> = (props) => {
 
 const getServerSideProps: GetServerSideProps = async (context) => {
   try {
-    const user = await serverSideAuthenticate(context);
+    const [user, shouldSetCookies] = await serverSideAuthenticate(context);
     return {
       props: {
         user,
+        shouldSetCookies,
       },
     };
   } catch (err) {
