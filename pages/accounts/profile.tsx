@@ -18,7 +18,10 @@ const Profile: React.FC<ProfileProps> = (props) => {
   );
 };
 
-const getServerSideProps: GetServerSideProps = serverSideAuthentication(true);
+const getServerSideProps: GetServerSideProps = serverSideAuthentication(
+  true,
+  "/accounts/profile"
+);
 
 const mapStateToProps = (state: State) => ({
   user: state.user,

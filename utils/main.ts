@@ -32,7 +32,8 @@ const authenticateByCookies = async (
 };
 
 const serverSideAuthentication = (
-  redirect: boolean
+  redirect: boolean,
+  next?: string
 ): GetServerSideProps => async (context) => {
   try {
     const [user, shouldSetCookies] = await authenticateByCookies(context);
@@ -43,7 +44,14 @@ const serverSideAuthentication = (
       },
     };
   } catch (err) {
-    if (redirect) {
+    if (redirect && next) {
+      return {
+        redirect: {
+          destination: `/accounts/login?sendTo=${next}`,
+          permanent: false,
+        },
+      };
+    } else if (redirect) {
       return {
         redirect: {
           destination: "/accounts/login",
