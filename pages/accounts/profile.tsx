@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
 import { Container } from "react-bootstrap";
+
 import { serverSideAuthenticate } from "../../utils";
 
 interface ProfileProps {}
