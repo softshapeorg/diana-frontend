@@ -1,7 +1,7 @@
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { connect } from "react-redux";
-import { Form, Button, Spinner } from "react-bootstrap";
+import { Form, Button, Spinner, Alert } from "react-bootstrap";
 
 import fields from "../fieldVS";
 import { login } from "../../redux/actions";
@@ -33,6 +33,9 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
 
   return (
     <Form onSubmit={formik.handleSubmit}>
+      <Alert variant="danger" show={!!props.user.err}>
+        Unable to login with the given credentials
+      </Alert>
       <Form.Group>
         <Form.Control
           placeholder="Username"
