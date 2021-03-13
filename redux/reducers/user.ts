@@ -2,6 +2,7 @@ import { produce } from "immer";
 
 import { UserActionTypes as types } from "../types";
 import { Action, UserState } from "../../types";
+import { cookies } from "../../utils";
 
 const init: UserState = {
   user: null,
@@ -22,6 +23,9 @@ const reducer = (state = init, action: Action) => {
     }
 
     case types.LOGIN_SUCCEED: {
+      // Set cookies
+      cookies.setAuthCookies(action.payload.tokens);
+
       return produce(state, (state) => {
         state.isLoading = false;
         state.err = null;
