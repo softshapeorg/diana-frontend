@@ -1,11 +1,12 @@
 import { AccountFormWrapper } from "../../components";
+import { RegistrationForm } from "../../forms";
 
 interface HomeProps {}
 
 const Home: React.FC<HomeProps> = (props) => {
   return (
     <AccountFormWrapper>
-      <h1>Registration</h1>
+      <RegistrationForm />
     </AccountFormWrapper>
   );
 };
