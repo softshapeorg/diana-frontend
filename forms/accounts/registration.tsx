@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { useFormik } from "formik";
 import * as yup from "yup";
-import { Form, Button, Col } from "react-bootstrap";
+import { Form, Button, Col, Spinner, Alert } from "react-bootstrap";
 
 import fields from "../fieldVS";
+import { requests } from "../../utils";
 
 const initialValues = {
   firstName: "",
@@ -23,16 +25,28 @@ const validationSchema = yup.object({
 interface RegistrationFormProps {}
 
 const RegistrationForm: React.FC<RegistrationFormProps> = (props) => {
+  const [registrationSucceed, setRegistrationSucceed] = useState(false);
+
   const formik = useFormik({
     initialValues,
     validationSchema,
-    onSubmit: (values) => {
-      console.log(values);
+    onSubmit: async (values, { setFieldError }) => {
+      try {
+        await requests.user.registration(values);
+        setRegistrationSucceed(true);
+      } catch (err) {
+        for (let field in err.response.data) {
+          setFieldError(field, err.response.data[field]);
+        }
+      }
     },
   });
 
   return (
     <Form onSubmit={formik.handleSubmit}>
+      <Alert variant="success" show={registrationSucceed}>
+        You have successfully registered your account
+      </Alert>
       <Form.Group>
         <Form.Row>
           <Col xs={6}>
@@ -102,7 +116,20 @@ const RegistrationForm: React.FC<RegistrationFormProps> = (props) => {
 
       <Form.Group>
         <Button block type="submit">
-          Registration
+          {formik.isSubmitting ? (
+            <>
+              <Spinner
+                as="span"
+                animation="border"
+                size="sm"
+                role="status"
+                aria-hidden="true"
+              />{" "}
+              Loading...
+            </>
+          ) : (
+            "Register"
+          )}
         </Button>
       </Form.Group>
     </Form>
