@@ -1,10 +1,10 @@
-import { GetServerSidePropsContext } from "next";
+import { GetServerSideProps, GetServerSidePropsContext } from "next";
 
 import { User } from "../types";
 import { mapCookiesToTokens } from "./mappers";
 import requests from "./requests";
 
-const serverSideAuthenticate = async (
+const authenticateByCookies = async (
   context: GetServerSidePropsContext
 ): Promise<[user: User, shouldSetCookies: boolean]> => {
   const tokens = mapCookiesToTokens(context.req.cookies);
@@ -31,4 +31,27 @@ const serverSideAuthenticate = async (
   }
 };
 
-export { serverSideAuthenticate };
+const serverSideAuthentication = (
+  redirect: boolean
+): GetServerSideProps => async (context) => {
+  try {
+    const [user, shouldSetCookies] = await authenticateByCookies(context);
+    return {
+      props: {
+        user,
+        shouldSetCookies,
+      },
+    };
+  } catch (err) {
+    if (redirect) {
+      return {
+        redirect: {
+          destination: "/accounts/login",
+          permanent: false,
+        },
+      };
+    }
+  }
+};
+
+export { authenticateByCookies, serverSideAuthentication };
