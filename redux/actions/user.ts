@@ -20,6 +20,8 @@ const login = (username: string, password: string) => async (
         data,
       },
     });
+
+    return true;
   } catch (err) {
     dispatch({
       type: types.LOGIN_FAILED,
@@ -27,6 +29,8 @@ const login = (username: string, password: string) => async (
         err: err,
       },
     });
+
+    return false;
   }
 };
 

@@ -1,3 +1,4 @@
+import { useRouter } from "next/router";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import { connect } from "react-redux";
@@ -23,11 +24,17 @@ interface LoginFormProps {
 }
 
 const LoginForm: React.FC<LoginFormProps> = (props) => {
+  const router = useRouter();
+
   const formik = useFormik({
     initialValues,
     validationSchema,
     onSubmit: async (values) => {
-      props.login(values.username, values.password);
+      const authed = await props.login(values.username, values.password);
+      const sendTo = router.query.sendTo || null;
+      if (authed && typeof sendTo === "string" && sendTo[0] === "/") {
+        router.push(sendTo);
+      }
     },
   });
 
