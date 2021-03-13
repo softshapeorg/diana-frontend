@@ -34,7 +34,7 @@ const registration = async (data: any): Promise<UserData> => {
 };
 
 const refreshTokens = async (tokens: UserTokens): Promise<UserTokens> => {
-  const res = await axios.post("/accounts/tokens/refresh/", {
+  const res = await axios.post("/accounts/token/refresh/", {
     refresh: tokens.refresh,
   });
 
