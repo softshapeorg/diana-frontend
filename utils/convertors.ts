@@ -10,4 +10,14 @@ const convertObjectKeysToCamelCase = (data: any) => {
   return res;
 };
 
-export { convertObjectKeysToCamelCase };
+const convertObjectKeysToSnakeCase = (data: any) => {
+  const res = {};
+
+  for (let key in data) {
+    res[_.snakeCase(key)] = data[key];
+  }
+
+  return res;
+};
+
+export { convertObjectKeysToCamelCase, convertObjectKeysToSnakeCase };
