@@ -1,4 +1,8 @@
+import { GetServerSidePropsContext } from "next";
+import { NextApiRequestCookies } from "next/dist/next-server/server/api-utils";
 import * as _ from "lodash";
+
+import { UserTokens } from "../types";
 
 const mapObjectKeysToCamelCase = (data: any) => {
   const res = {};
@@ -20,4 +24,13 @@ const mapObjectKeysToSnakeCase = (data: any) => {
   return res;
 };
 
-export { mapObjectKeysToCamelCase, mapObjectKeysToSnakeCase };
+const mapCookiesToTokens = (cookies: NextApiRequestCookies): UserTokens => ({
+  access: cookies.accessToken,
+  refresh: cookies.refreshToken,
+});
+
+export {
+  mapObjectKeysToCamelCase,
+  mapObjectKeysToSnakeCase,
+  mapCookiesToTokens,
+};

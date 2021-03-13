@@ -33,11 +33,23 @@ const registration = async (data: any): Promise<UserData> => {
   return <UserData>mapObjectKeysToCamelCase(res.data);
 };
 
+const refreshTokens = async (tokens: UserTokens): Promise<UserTokens> => {
+  const res = await axios.post("/accounts/tokens/refresh/", {
+    refresh: tokens.refresh,
+  });
+
+  return {
+    access: res.data.access,
+    refresh: res.data.refresh,
+  };
+};
+
 const requests = {
   user: {
     tokens: userTokens,
     data: userData,
     registration,
+    refreshTokens,
   },
 };
 
