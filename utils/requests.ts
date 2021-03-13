@@ -27,13 +27,13 @@ const userData = async (tokens: UserTokens): Promise<UserData> => {
   return <UserData>convertObjectKeysToCamelCase(res.data);
 };
 
-const registration = async (data: any) => {
+const registration = async (data: any): Promise<UserData> => {
   const res = await axios.post(
     "/accounts/registration/",
     convertObjectKeysToSnakeCase(data)
   );
 
-  return convertObjectKeysToCamelCase(res.data);
+  return <UserData>convertObjectKeysToCamelCase(res.data);
 };
 
 const requests = {
