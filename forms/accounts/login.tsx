@@ -34,6 +34,8 @@ const LoginForm: React.FC<LoginFormProps> = (props) => {
       const sendTo = router.query.sendTo || null;
       if (authed && typeof sendTo === "string" && sendTo[0] === "/") {
         router.push(sendTo);
+      } else if (authed) {
+        router.push("/");
       }
     },
   });
