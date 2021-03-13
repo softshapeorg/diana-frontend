@@ -1,3 +1,3 @@
-import FormWrapper from "./formWrapper";
+import AccountFormWrapper from "./accountFormWrapper";
 
-export { FormWrapper };
+export { AccountFormWrapper };
